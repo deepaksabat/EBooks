@@ -77,6 +77,8 @@ class PageController extends Controller
 	}
 	public function getAllCategory()
 	{
-
+		$categories = Category::paginate(10);
+        //dd($books);
+        return view('Front.allcategory', compact('categories'));
 	}
 }
