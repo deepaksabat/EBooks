@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Category;
 use DB;
+use App\ContactUs;
 
 
 class PageController extends Controller
@@ -39,13 +40,33 @@ class PageController extends Controller
 	}
 
 	public function getContact()
-	{
+    {
+    	return view('Front.contactus');
+    }
 
-	}
-	public function postContact()
-	{
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'email' => 'required',
 
-	}
+        ]);
+    }
+
+    public function postContactStore(Request $request)
+    {
+    	//dd($request->all());
+    	$validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+    	$contact = ContactUs::create($request->all());
+
+    	return redirect()->back()->with('message', 'Thanks for Your Feedback ');
+    }
 	public function getUpload()
 	{
 

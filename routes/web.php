@@ -23,13 +23,32 @@ Route::group(['middleware' => ['auth']], function () {
 });
 Auth::routes();
 
+Route::get('/contact',[
+        'uses' => 'PageController@getContact',
+        'as' => 'news.contactus'
+    ]);
+Route::post('/contactstore',[
+        'uses' => 'PageController@postContactStore',
+        'as' => 'news.contactstore'
+    ]);
+
 
 
 Route::get('/', ['as'=>'get.home', 'uses'=>'PageController@getHome']);
 Route::get('bookdetails/{id}',['as'=>'bookdetails', 'uses'=>'PageController@getBookdetails']);
 Route::get('book/{id}/downlode', ['as'=> 'bookdownlode', 'uses'=>'PageController@bookDownlode']);
-Route::get('/contact',['as'=>'get.contact','uses'=>'PageController@getContact']);
-Route::post('/postcontact',['as'=>'post.contact','uses'=>'PageController@postContact']);
 Route::get('/upload',['as'=>'get.upload','uses'=>'PageController@getUpload']);
 Route::post('/postupload',['as'=>'post.upload','uses'=>'PageController@postUpload']);
 Route::get('/allcategory',['as'=>'get.allcategory','uses'=>'PageController@getAllCategory']);
+
+
+
+
+
+
+
+
+
+
+
+
